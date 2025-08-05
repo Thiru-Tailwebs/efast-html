@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>India Pilot Map - Highcharts</title>
+  <meta charset="utf-8" />
+  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/mapdata/countries/in/in-all.js"></script>
+  <style>
+    #container {
+      height: 600px;
+      width: 70%;
+      float: left;
+    }
+
+    .popup {
+      position: absolute;
+      left: 40%;
+      top: 40%;
+      width: 20%;
+      margin-left: 2%;
+      background: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      font-family: sans-serif;
+      display: none;
+    }
+
+    .state-label {
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ccc;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+  <div id="popup" class="popup"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const locations = {
+        "Haryana": { lat: 29.0588, lon: 76.0856, area: "Vijaynagar" },
+        "Uttar Pradesh": { lat: 26.8467, lon: 80.9462, area: "Ghaziabad" },
+        "Gujarat": { lat: 22.2587, lon: 71.1924, area: "Ahmedabad" },
+        "Rajasthan": { lat: 27.0238, lon: 74.2179, area: "Jaipur" },
+        "Maharashtra": { lat: 19.7515, lon: 75.7139, area: "Pune" },
+        "Madhya Pradesh": { lat: 22.9734, lon: 78.6569, area: "Indore" },
+        "Karnataka": { lat: 15.3173, lon: 75.7139, area: "Vijayanagar" },
+        "Andhra Pradesh": { lat: 15.9129, lon: 79.7400, area: "Nandyala" },
+        "Kerala": { lat: 10.8505, lon: 76.2711, area: "Kochi" },
+        "Tamil Nadu": { lat: 11.1271, lon: 78.6569, area: "Chennai" }
+      };
+
+      const routes = [
+        ["Haryana", "Uttar Pradesh"],
+        ["Gujarat", "Rajasthan"],
+        ["Maharashtra", "Madhya Pradesh"],
+        ["Karnataka", "Andhra Pradesh"],
+        ["Kerala", "Tamil Nadu"]
+      ];
+
+      const map = Highcharts.mapChart('container', {
+        chart: {
+          map: 'countries/in/in-all'
+        },
+        title: {
+          text: 'Pilot MHDT Application Routes'
+        },
+        tooltip: { enabled: false },
+
+        series: [
+          {
+            name: 'India',
+            borderColor: '#A0A0A0',
+            nullColor: '#E0E0E0',
+            showInLegend: false,
+            dataLabels: {
+              enabled: true,
+              useHTML: true,
+              formatter: function () {
+                if (this.point.showLabel) {
+                  const area = locations[this.point.name]?.area;
+                  return `<div class="state-label">${this.point.name} (${area})</div>`;
+                }
+                return '';
+              }
+            }
+          },
+          {
+            type: 'mapline',
+            color: '#000000',
+            dashStyle: 'Dash',
+            lineWidth: 2,
+            data: routes.map(([from, to]) => ({
+              geometry: {
+                type: 'LineString',
+                coordinates: [
+                  [locations[from].lon, locations[from].lat],
+                  [locations[to].lon, locations[to].lat]
+                ]
+              }
+            })),
+            enableMouseTracking: false
+          },
+          {
+            type: 'mappoint',
+            name: 'Markers',
+            data: routes.flatMap(([from, to]) => [
+              {
+                name: from,
+                lat: locations[from].lat,
+                lon: locations[from].lon,
+                area: locations[from].area,
+                pair: [from, to],
+                markerImage: 'assets/images/start-marker.svg'
+              },
+              {
+                name: to,
+                lat: locations[to].lat,
+                lon: locations[to].lon,
+                area: locations[to].area,
+                pair: [from, to],
+                markerImage: 'assets/images/start-marker.svg'
+              }
+            ]),
+            marker: {
+              symbol: 'url(assets/images/start-marker.svg)',
+              width: 10,
+              height: 20
+            },
+            dataLabels: {
+              enabled: false
+            },
+            cursor: 'pointer',
+            point: {
+              events: {
+                click: function () {
+                  const chart = this.series.chart;
+                  const [from, to] = this.pair;
+
+                  // Show popup
+                  const popup = document.getElementById("popup");
+                  popup.innerHTML = `
+                <h3>${from} (${locations[from].area}) → ${to} (${locations[to].area})</h3>
+                <p><strong>Distance:</strong> 300 km</p>
+                <p><strong>Truck Type:</strong> Tata HCV</p>
+                <p><strong>Use Case:</strong> Cement Transport</p>
+              `;
+                  popup.style.display = 'block';
+
+                  // Show label only for selected
+                  chart.series[0].data.forEach(p => {
+                    p.update({
+                      showLabel: (p.name === from || p.name === to),
+                      color: (p.name === from || p.name === to) ? '#FFD700' : '#E0E0E0'
+                    }, false);
+                  });
+
+                  // Change marker icons
+                  this.series.points.forEach(p => {
+                    const isSelected = (p.name === from || p.name === to);
+                    p.update({
+                      marker: {
+                        symbol: `url(${isSelected ? 'assets/images/green-marker.svg' : 'assets/images/start-marker.svg'})`,
+                        width: 15,
+                        height: 22
+                      }
+                    }, false);
+                  });
+
+                  chart.redraw();
+                }
+              }
+            }
+          }
+        ]
+      });
+    });
+  </script>
+
+</body>
+
+</html>
