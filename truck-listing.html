@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-FAST India</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- Top Mini-Header -->
+  <div class="mini-header py-1 px-3 bg-light">
+    <div class="container-fluid d-flex justify-content-end align-items-center">
+      <div class="social-icons">
+        <a href="#" class="text-secondary me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="text-secondary me-3"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-secondary"><i class="bi bi-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header (Navbar) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="assets/images/e-fast-logo.png" alt="E-FAST India" height="36" class="me-2">
+          <!-- <span class="fw-bold fs-5 text-primary">E-FAST India</span> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Partners</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="efreightDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                e-Freight Navigator
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="efreightDropdown">
+                <li><a class="dropdown-item" href="#">Overview</a></li>
+                <li><a class="dropdown-item" href="#">Tools</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Media</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Join Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="position-relative">
+      <img src="assets/images/truck-listing/truck-hero-bg.jpg" class="img-fluid w-100 hero-bg" alt="Truck on road">
+      <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+        <div class="container">
+          <div class="padding-style-1">
+            <div class="row">
+              <div class="col-lg-5 col-md-8">
+                <h1 class="head-white ft-50 ft-24-mob">Heavy Commercial <br> Vehicle (HCVs)</h1>
+                <div class="d-flex gap-3 mt-75 mt-30-mob">
+                  <a href="#" class="btn hero-btn-1">Compare HCV</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Truck Listing Section -->
+  <section class="truck-listing-section">
+    <div class="bg-blue">
+      <div class="container">
+        <div class="padding-style-1">
+          <form action="">
+            <div class="row align-items-center gap-3 gap-md-0">
+              <div class="col-lg-3 col-md-4">
+                <select name="oem" id="oem" class="w-100" aria-label="Default select example">
+                  <option selected>Select OEM</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-4">
+                <select name="vehicle-size" id="vehicle-size" class="w-100" aria-label="Default select example">
+                  <option selected>Select Vehicle Size</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-4">
+                <input type="search" class="form-control" placeholder="Search Here" aria-label="Search Here">
+              </div>
+              <div class="col-lg-3 col-md-4">
+                <select name="sorting" id="sorting" class="w-100" aria-label="Default select example">
+                  <option selected>Sorting</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="padding-style-1">
+        <!-- View Toggle -->
+        <div class="d-none d-md-block">
+          <div class="d-flex justify-content-end mb-3">
+            <button id="tabViewBtn" class="btn tab-btn me-2 active"><i class="bi bi-grid"></i></button>
+            <button id="listViewBtn" class="btn tab-btn"><i class="bi bi-list"></i></button>
+          </div>
+        </div>
+
+        <!-- Tab View (Grid Cards) -->
+        <div id="tabView" class="row g-4 mt-30 mt-0-mob">
+          <!-- Repeat this col for each truck -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card truck-card h-100 shadow-sm border-0 rounded-3">
+              <div class="position-relative">
+                <img src="assets/images/truck-listing/truck-1.jpg" class="card-img-top rounded-top-3" alt="Truck">
+                <p class="ft-12 para-black position-absolute tag">CMVR Classification: <span class="ft-16 fw-medium">N3</span></p>
+              </div>
+              <div class="card-body pb-2">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="fw-semibold ft-16"><span class="ft-14 fw-medium">Tata Motors</span> <br> Tata Prima Electric</p>
+                  </div>
+                  <div>
+                    <p class="ft-20 fw-bold">50.20 - 50.90 <br> <span class="ft-16 fw-normal">Lakhs</span></p>
+                  </div>
+                </div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td class="ft-12">Payload Capacity (in tons)</td>
+                      <td class="ft-16 fw-medium">5 Tons</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">GVW (Gross Vehicle Weight in tons)</td>
+                      <td class="ft-16 fw-medium">28 Tons</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Battery Capacity (in kWh)</td>
+                      <td class="ft-16 fw-medium">453 kWh</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Range (km) (Battery range per charge)</td>
+                      <td class="ft-16 fw-medium">453 kWh</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Battery Manufacturer</td>
+                      <td class="ft-16 fw-medium">Tata Power</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <a href="mailto:example@example.com" class="btn card-btn w-100"><span class="ft-12 me-3">Contact Email:</span> Tata.motors@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card truck-card h-100 shadow-sm border-0 rounded-3">
+              <div class="position-relative">
+                <img src="assets/images/truck-listing/truck-2.jpg" class="card-img-top rounded-top-3" alt="Truck">
+                <p class="ft-12 para-black position-absolute tag">CMVR Classification: <span class="ft-16 fw-medium">N2</span></p>
+              </div>
+              <div class="card-body pb-2">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="fw-semibold ft-16"><span class="ft-14 fw-medium">Ashok Leyland</span> <br> Boss 12T</p>
+                  </div>
+                  <div>
+                    <p class="ft-20 fw-bold">40.20- 45.90 <br> <span class="ft-16 fw-normal">Lakhs</span></p>
+                  </div>
+                </div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td class="ft-12">Payload Capacity (in tons)</td>
+                      <td class="ft-16 fw-medium">5 Tons</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">GVW (Gross Vehicle Weight in tons)</td>
+                      <td class="ft-16 fw-medium">28 Tons</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Battery Capacity (in kWh)</td>
+                      <td class="ft-16 fw-medium">453 kWh</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Range (km) (Battery range per charge)</td>
+                      <td class="ft-16 fw-medium">453 kWh</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Battery Manufacturer</td>
+                      <td class="ft-16 fw-medium">Tata Power</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <a href="mailto:example@example.com" class="btn card-btn w-100"><span class="ft-12 me-3">Contact Email:</span> Ashok.Leyland@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card truck-card h-100 shadow-sm border-0 rounded-3">
+              <div class="position-relative">
+                <img src="assets/images/truck-listing/truck-3.jpg" class="card-img-top rounded-top-3" alt="Truck">
+                <p class="ft-12 para-black position-absolute tag">CMVR Classification: <span class="ft-16 fw-medium">N3</span></p>
+              </div>
+              <div class="card-body pb-2">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="fw-semibold ft-16"><span class="ft-14 fw-medium">I- Board Mobility</span> <br> I- Board Tipper Eley </p>
+                  </div>
+                  <div>
+                    <p class="ft-20 fw-bold">50.20 - 50.90 <br> <span class="ft-16 fw-normal">Lakhs</span></p>
+                  </div>
+                </div>
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <td class="ft-12">Payload Capacity (in tons)</td>
+                      <td class="ft-16 fw-medium">5 Tons</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">GVW (Gross Vehicle Weight in tons)</td>
+                      <td class="ft-16 fw-medium">28 Tons</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Battery Capacity (in kWh)</td>
+                      <td class="ft-16 fw-medium">453 kWh</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Range (km) (Battery range per charge)</td>
+                      <td class="ft-16 fw-medium">453 kWh</td>
+                    </tr>
+                    <tr>
+                      <td class="ft-12">Battery Manufacturer</td>
+                      <td class="ft-16 fw-medium">Tata Power</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <a href="mailto:example@example.com" class="btn card-btn w-100"><span class="ft-12 me-3">Contact Email:</span> I.BoardMobility@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="text-end mt-4">
+              <button class="btn load-more-btn">Load More</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- List View (Horizontal Cards) -->
+        <div id="listView" class="d-none mt-30">
+          <div class="card truck-card-list mb-4 shadow-sm border-0 rounded-3">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-4">
+                <div class="position-relative">
+                  <img src="assets/images/truck-listing/truck-1.jpg" class="img-fluid rounded-start-3" alt="Truck">
+                  <p class="ft-12 para-black position-absolute tag">CMVR Classification: <span class="ft-16 fw-medium">N3</span></p>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="card-body">
+                  <div class="fw-semibold ft-16 mb-2"><span class="ft-14 fw-medium">Tata Motors</span> <br> Tata Prima Electric </div>
+                  <div class="ft-20 fw-bold mb-2">50.20 - 50.90 <span class="ft-16 fw-normal">Lakhs</span></div>
+                  <div class="mb-2"><span class="text-muted small">Payload Capacity (in tons):</span> <span class="fw-bold">5 Tons</span></div>
+                  <div class="mb-2"><span class="text-muted small">GVW (Gross Vehicle Weight in tons):</span> <span class="fw-bold">28 Tons</span></div>
+                  <div class="mb-2"><span class="text-muted small">Battery Capacity (in kWh):</span> <span class="fw-bold">453 kWh</span></div>
+                  <div class="mb-2"><span class="text-muted small">Range (km) (Battery range per charge):</span> <span class="fw-bold">453 km</span></div>
+                  <div class="mb-2"><span class="text-muted small">Battery Manufacturer:</span> <span class="fw-bold">Tata Power</span></div>
+                </div>
+              </div>
+              <div class="col-md-3 text-end pe-4">
+                <a href="mailto:example@example.com" class="btn card-btn w-100"><span class="ft-12 me-3">Contact Email:</span> Tata.motors@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="card truck-card-list mb-4 shadow-sm border-0 rounded-3">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-4">
+                <div class="position-relative">
+                  <img src="assets/images/truck-listing/truck-2.jpg" class="img-fluid rounded-start-3" alt="Truck">
+                  <p class="ft-12 para-black position-absolute tag">CMVR Classification: <span class="ft-16 fw-medium">N2</span></p>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="card-body">
+                  <div class="fw-semibold ft-16 mb-2"><span class="ft-14 fw-medium">Ashok Leyland</span> <br> Boss 12T </div>
+                  <div class="ft-20 fw-bold mb-2">50.20 - 50.90 <span class="ft-16 fw-normal">Lakhs</span></div>
+                  <div class="mb-2"><span class="text-muted small">Payload Capacity (in tons):</span> <span class="fw-bold">5 Tons</span></div>
+                  <div class="mb-2"><span class="text-muted small">GVW (Gross Vehicle Weight in tons):</span> <span class="fw-bold">28 Tons</span></div>
+                  <div class="mb-2"><span class="text-muted small">Battery Capacity (in kWh):</span> <span class="fw-bold">453 kWh</span></div>
+                  <div class="mb-2"><span class="text-muted small">Range (km) (Battery range per charge):</span> <span class="fw-bold">453 km</span></div>
+                  <div class="mb-2"><span class="text-muted small">Battery Manufacturer:</span> <span class="fw-bold">Tata Power</span></div>
+                </div>
+              </div>
+              <div class="col-md-3 text-end pe-4">
+                <a href="mailto:example@example.com" class="btn card-btn w-100"><span class="ft-12 me-3">Contact Email:</span> Ashok.Leyland@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="card truck-card-list mb-4 shadow-sm border-0 rounded-3">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-4">
+                <div class="position-relative">
+                  <img src="assets/images/truck-listing/truck-3.jpg" class="img-fluid rounded-start-3" alt="Truck">
+                  <p class="ft-12 para-black position-absolute tag">CMVR Classification: <span class="ft-16 fw-medium">N3</span></p>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="card-body">
+                  <div class="fw-semibold ft-16 mb-2"><span class="ft-14 fw-medium">I- Board Mobility</span> <br> I- Board Tipper Eley  </div>
+                  <div class="ft-20 fw-bold mb-2">50.20 - 50.90 <span class="ft-16 fw-normal">Lakhs</span></div>
+                  <div class="mb-2"><span class="text-muted small">Payload Capacity (in tons):</span> <span class="fw-bold">5 Tons</span></div>
+                  <div class="mb-2"><span class="text-muted small">GVW (Gross Vehicle Weight in tons):</span> <span class="fw-bold">28 Tons</span></div>
+                  <div class="mb-2"><span class="text-muted small">Battery Capacity (in kWh):</span> <span class="fw-bold">453 kWh</span></div>
+                  <div class="mb-2"><span class="text-muted small">Range (km) (Battery range per charge):</span> <span class="fw-bold">453 km</span></div>
+                  <div class="mb-2"><span class="text-muted small">Battery Manufacturer:</span> <span class="fw-bold">Tata Power</span></div>
+                </div>
+              </div>
+              <div class="col-md-3 text-end pe-4">
+                <a href="mailto:example@example.com" class="btn card-btn w-100"><span class="ft-12 me-3">Contact Email:</span> I.BoardMobility@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="text-end mt-5">
+            <button class="btn load-more-btn">Load More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-6 col-md-3">
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">Home</a></li>
+            <li><a href="#" class="footer-link">About</a></li>
+            <li><a href="#" class="footer-link">Partners</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3">
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">Media</a></li>
+            <li><a href="#" class="footer-link">Events</a></li>
+            <li><a href="#" class="footer-link">Join Us</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="fw-bold mb-2">E- Freight Navigator</div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="mb-2">
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+          </div>
+          <div class="small text-white-50">
+            Niti Aayog is India’s premier policy-making institution working to bolster the country’s economic growth in a sustainable manner.
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top border-secondary pt-3 mt-4">
+        <div class="small text-white-50">
+          <a href="#" class="footer-link me-3">Terms and policies</a>
+          © 2025 e-Fast India
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Select2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- Custom JS -->
+  <script src="assets/js/script.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('select').select2();
+    });
+
+    document.getElementById('tabViewBtn').onclick = function() {
+      document.getElementById('tabView').classList.remove('d-none');
+      document.getElementById('listView').classList.add('d-none');
+      this.classList.add('active');
+      document.getElementById('listViewBtn').classList.remove('active');
+    };
+    document.getElementById('listViewBtn').onclick = function() {
+      document.getElementById('listView').classList.remove('d-none');
+      document.getElementById('tabView').classList.add('d-none');
+      this.classList.add('active');
+      document.getElementById('tabViewBtn').classList.remove('active');
+    };
+  </script>
+</body>
+</html>
