@@ -156,6 +156,10 @@ body {
   overflow: hidden;
 }
 
+.bg-lightblue {
+  background-color: #EDF7FC;
+}
+
 /* Homepage Styles */
 .hero-btn-1 {
   background-color: #F08900;
@@ -451,6 +455,108 @@ body {
 @media (max-width: 767px) {
   .spec-table-header,
   .spec-table td {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.7rem;
+  }
+}
+
+/* Truck Comparison Styles */
+
+.search-input {
+  border-radius: 20px;
+  border: 0.5px solid #979797;
+  padding: 6px 18px;
+  font-size: 14px;
+}
+
+.modal-body h4 {
+  color: #004E74;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.modal-body p {
+  color: #AAAAAA;
+  font-size: 16px;
+  margin-left: 1rem;
+}
+
+.modal-body ul li {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.modal-body ul li:hover {
+  cursor: pointer;
+  color: #F08900;
+}
+
+.truck-card {
+  cursor: pointer;
+}
+
+.close-div {
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.close-div img {
+  width: 24px;
+  cursor: pointer;
+}
+
+.compare-spec-table-title-card {
+  background-color: #EDF7FC;
+  border-radius: 20px 20px 0px 0px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.compare-spec-table-title-card h3 {
+  font-size: 18px;
+  color: #373737;
+  font-weight: 700;
+}
+
+.compare-spec-table-title-card p {
+  font-size: 16px;
+  color: #373737;
+  font-weight: 500;
+}
+
+.compare-spec-table-card {
+  box-shadow: 0 2px 12px rgba(33,150,243,0.08);
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.compare-spec-table-header {
+  background: #232323;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.compare-spec-table tbody tr:nth-of-type(even) {
+  background-color: #ECECEC;
+}
+
+.compare-spec-table td {
+  border: none !important;
+  padding: 1rem;
+  vertical-align: middle;
+  font-size: 1rem;
+  color: #232323;
+}
+
+@media (max-width: 767px) {
+  .compare-spec-table-header,
+  .compare-spec-table td {
     font-size: 0.95rem;
     padding: 0.6rem 0.7rem;
   }
