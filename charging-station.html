@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charging Station Locator - e-FAST India</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Highcharts Maps -->
+  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+  <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/mapdata/countries/in/in-all.js"></script>
+  <style>
+    /* Header and Footer Styles */
+    .mini-header {
+      background-color: #1a237e !important;
+    }
+    .mini-header .social-icons a {
+      color: white !important;
+      text-decoration: none;
+    }
+    .navbar-brand img {
+      height: 36px;
+    }
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      color: #0d6efd !important;
+    }
+    .footer-section {
+      background-color: #1a237e !important;
+    }
+    .footer-link {
+      color: #adb5bd !important;
+      text-decoration: none;
+    }
+    .footer-link:hover {
+      color: white !important;
+    }
+    
+    /* Hero Section Styles */
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                  url('assets/images/home-page/slider-img.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.3);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-title {
+      color: white;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    /* Filter Bar Styles */
+    .filter-section {
+      background: white;
+      padding: 20px 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .filter-section .form-select,
+    .filter-section .form-control {
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+    
+    /* Map Styles */
+    #india-map-container { 
+      min-height: 600px; 
+      width: 100%; 
+    }
+    .marker-ongoing { 
+      color: #1e90ff; 
+      font-size: 1.5rem; 
+    }
+    .marker-upcoming { 
+      color: #28a745; 
+      font-size: 1.5rem; 
+    }
+    .state-top10 { 
+      fill: #2b8cbe !important; 
+    }
+    .state-next10 { 
+      fill: #7bccc4 !important; 
+    }
+    .state-rest { 
+      fill: #bae4bc !important; 
+    }
+    .station-list { 
+      max-height: 550px; 
+      overflow-y: auto; 
+    }
+    .station-item:hover { 
+      background: #f1f1f1; 
+      cursor: pointer; 
+    }
+    .highlight-marker { 
+      border: 2px solid #ff9800 !important; 
+    }
+    
+    /* State Info Box */
+    .state-info-box {
+      position: absolute;
+      background: #ff9800;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1000;
+      max-width: 250px;
+    }
+    .state-info-box h5 {
+      margin: 0 0 10px 0;
+      font-weight: bold;
+    }
+    .state-info-box p {
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    /* Map Legend */
+    .map-legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 14px;
+      z-index: 1000;
+    }
+    .map-legend i {
+      color: #28a745;
+      margin-right: 8px;
+    }
+    
+    /* Disclaimer */
+    .disclaimer {
+      font-size: 12px;
+      color: #6c757d;
+      text-align: center;
+      margin-top: 15px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Top Mini-Header -->
+  <div class="mini-header py-1 px-3">
+    <div class="container-fluid d-flex justify-content-end align-items-center">
+      <div class="social-icons">
+        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
+        <a href="#"><i class="bi bi-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header (Navbar) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="assets/images/e-fast-logo.png" alt="E-FAST India" class="me-2">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Partners</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="efreightDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                e-Freight Navigator
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="efreightDropdown">
+                <li><a class="dropdown-item" href="#">Overview</a></li>
+                <li><a class="dropdown-item" href="#">Tools</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Media</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Join Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Charging Station<br>Locator</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-3">
+          <select id="filter-state" class="form-select">
+            <option value="">Select State</option>
+            <!-- JS will populate -->
+          </select>
+        </div>
+        <div class="col-md-3">
+          <input id="filter-pincode" type="text" class="form-control" placeholder="Enter Pincode">
+        </div>
+        <div class="col-md-3">
+          <select id="filter-type" class="form-select">
+            <option>All Stations Type</option>
+            <option>Direct Charging station</option>
+            <option>Battery Swap station</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select id="filter-level" class="form-select">
+            <option>Charging Level: Level 3 (Fast/DCFC)</option>
+            <option>Level 2</option>
+            <option>Level 1</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- India Map Section -->
+  <div class="container py-4">
+    <div class="position-relative">
+      <div id="india-map-container"></div>
+      
+      <!-- State Info Box (will be shown when state is selected) -->
+      <div id="state-info-box" class="state-info-box d-none">
+        <h5 id="state-name"></h5>
+        <p>Ongoing Stations: <span id="ongoing-count"></span></p>
+        <p>Upcoming Stations: <span id="upcoming-count"></span></p>
+      </div>
+      
+      <!-- Map Legend -->
+      <div class="map-legend">
+        <i class="bi bi-lightning-charge"></i> Charging Locator
+      </div>
+    </div>
+    
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      Disclaimer: This map is for illustrative purpose and does not imply the expression of any opinion on the part of e-FAST India, concerning the legal status of any country or territory or concerning the delimitation of frontiers or boundaries.
+    </div>
+  </div>
+
+  <!-- State Map Section (hidden by default) -->
+  <div id="state-map-section" class="container py-4 d-none">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 id="state-map-title" class="mb-0"></h4>
+          <button id="back-to-india" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left"></i> Back to India Map
+          </button>
+        </div>
+        <div class="position-relative">
+          <div id="state-map-container" style="height: 600px;"></div>
+          
+          <!-- State Map Legend -->
+          <div class="map-legend">
+            <i class="bi bi-lightning-charge text-primary"></i> Ongoing Stations
+            <i class="bi bi-lightning-charge text-success ms-3"></i> Upcoming Stations
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pincode UI (hidden by default) -->
+  <div id="pincode-ui" class="container mt-3 d-none">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="bg-white rounded p-3 shadow">
+          <h5 id="pincode-location"></h5>
+          <div id="station-list" class="station-list"></div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div id="pincode-map" style="height: 550px;" class="rounded shadow"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-section text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-6 col-md-3">
+          <ul class="list-unstyled">
+            <li><a href="home.html" class="footer-link">Home</a></li>
+            <li><a href="#" class="footer-link">About</a></li>
+            <li><a href="#" class="footer-link">Partners</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3">
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">Media</a></li>
+            <li><a href="#" class="footer-link">Events</a></li>
+            <li><a href="#" class="footer-link">Join Us</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="fw-bold mb-2">E- Freight Navigator</div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="mb-2">
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+          </div>
+          <div class="small text-white-50">
+            Niti Aayog is India's premier policy-making institution working to bolster the country's economic growth in a sustainable manner.
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top border-secondary pt-3 mt-4">
+        <div class="small text-white-50">
+          <a href="#" class="footer-link me-3">Terms and policies</a>
+          © 2025 e-Fast India
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Set your marker SVG/image paths here
+    const stateMarkerImage = "assets/images/state-marker.svg";
+    const stationMarkerOngoingImage = "assets/images/start-marker.svg";
+    const stationMarkerUpcomingImage = "assets/images/green-marker.svg";
+
+    // Dummy data for states and stations
+    const statesData = [
+      { code: 'IN-UP', name: 'Uttar Pradesh', ongoing: 120, upcoming: 80, lat: 27.0, lon: 80.0 },
+      { code: 'IN-MH', name: 'Maharashtra', ongoing: 110, upcoming: 90, lat: 19.75, lon: 75.71 },
+      { code: 'IN-TN', name: 'Tamil Nadu', ongoing: 100, upcoming: 70, lat: 11.1271, lon: 78.6569 },
+      { code: 'IN-KA', name: 'Karnataka', ongoing: 703, upcoming: 1009, lat: 15.3173, lon: 75.7139 },
+      { code: 'IN-GJ', name: 'Gujarat', ongoing: 90, upcoming: 50, lat: 22.2587, lon: 71.1924 },
+      { code: 'IN-RJ', name: 'Rajasthan', ongoing: 85, upcoming: 40, lat: 27.0238, lon: 74.2179 },
+      { code: 'IN-WB', name: 'West Bengal', ongoing: 80, upcoming: 30, lat: 22.9868, lon: 87.8550 },
+      { code: 'IN-MP', name: 'Madhya Pradesh', ongoing: 75, upcoming: 25, lat: 22.9734, lon: 78.6569 },
+      { code: 'IN-TG', name: 'Telangana', ongoing: 70, upcoming: 20, lat: 18.1124, lon: 79.0193 },
+      { code: 'IN-AP', name: 'Andhra Pradesh', ongoing: 65, upcoming: 15, lat: 15.9129, lon: 79.7400 },
+      // Next 10
+      { code: 'IN-OR', name: 'Odisha', ongoing: 60, upcoming: 10, lat: 20.9517, lon: 85.0985 },
+      { code: 'IN-KL', name: 'Kerala', ongoing: 55, upcoming: 10, lat: 10.8505, lon: 76.2711 },
+      { code: 'IN-JH', name: 'Jharkhand', ongoing: 50, upcoming: 10, lat: 23.6102, lon: 85.2799 },
+      { code: 'IN-AS', name: 'Assam', ongoing: 45, upcoming: 10, lat: 26.2006, lon: 92.9376 },
+      { code: 'IN-PB', name: 'Punjab', ongoing: 40, upcoming: 10, lat: 30.7333, lon: 76.7794 },
+      { code: 'IN-CT', name: 'Chhattisgarh', ongoing: 35, upcoming: 10, lat: 21.2787, lon: 81.8661 },
+      { code: 'IN-HR', name: 'Haryana', ongoing: 30, upcoming: 10, lat: 29.0588, lon: 76.0856 },
+      { code: 'IN-JK', name: 'Jammu and Kashmir', ongoing: 25, upcoming: 10, lat: 33.7782, lon: 76.5762 },
+      { code: 'IN-UT', name: 'Uttarakhand', ongoing: 20, upcoming: 10, lat: 30.3165, lon: 78.0322 },
+      { code: 'IN-HP', name: 'Himachal Pradesh', ongoing: 15, upcoming: 10, lat: 31.1048, lon: 77.1734 },
+      // Rest
+      { code: 'IN-TR', name: 'Tripura', ongoing: 10, upcoming: 5, lat: 23.9408, lon: 91.9882 },
+      { code: 'IN-ML', name: 'Meghalaya', ongoing: 8, upcoming: 3, lat: 25.467, lon: 91.3662 },
+      { code: 'IN-MN', name: 'Manipur', ongoing: 7, upcoming: 2, lat: 24.8032, lon: 93.8363 },
+      { code: 'IN-NL', name: 'Nagaland', ongoing: 6, upcoming: 2, lat: 26.1584, lon: 94.5624 },
+      { code: 'IN-AR', name: 'Arunachal Pradesh', ongoing: 5, upcoming: 1, lat: 28.218, lon: 94.7278 },
+      { code: 'IN-MZ', name: 'Mizoram', ongoing: 4, upcoming: 1, lat: 23.1645, lon: 92.9376 },
+      { code: 'IN-SK', name: 'Sikkim', ongoing: 3, upcoming: 1, lat: 27.533, lon: 88.5122 },
+      { code: 'IN-GA', name: 'Goa', ongoing: 2, upcoming: 1, lat: 15.2993, lon: 74.124 },
+      { code: 'IN-DL', name: 'Delhi', ongoing: 1, upcoming: 1, lat: 28.6139, lon: 77.209 },
+      { code: 'IN-PY', name: 'Puducherry', ongoing: 1, upcoming: 0, lat: 11.9416, lon: 79.8083 }
+    ];
+
+    // Generate dummy station data for a state
+    function generateStateStations(state, count, type) {
+      return Array.from({ length: count }).map((_, i) => {
+        const lat = state.lat + (Math.random() - 0.5) * 2; // Spread within state
+        const lng = state.lon + (Math.random() - 0.5) * 2;
+        return {
+          id: `${type}-${i}`,
+          name: `${type} Station ${i + 1}`,
+          type: type,
+          address: `Address ${i + 1}, ${state.name}`,
+          lat: lat,
+          lng: lng,
+          status: type === 'Ongoing' ? 'Operational' : 'Under Construction'
+        };
+      });
+    }
+
+    // Generate dummy pincode data for any 6-digit pincode
+    function getDummyPincodeData(pincode) {
+      // Pick a state based on the pincode digits for deterministic results
+      const stateIdx = parseInt(pincode.substr(0, 2), 10) % statesData.length;
+      const state = statesData[stateIdx];
+      // Generate a fake city name
+      const city = state.name.split(' ')[0] + " City";
+      // Generate 2-5 dummy stations near the state center
+      const stationCount = 2 + (parseInt(pincode.substr(2, 1), 10) % 4);
+      const stations = Array.from({length: stationCount}).map((_, i) => {
+        const lat = state.lat + (Math.random() - 0.5) * 0.2;
+        const lng = state.lon + (Math.random() - 0.5) * 0.2;
+        return {
+          name: `Station ${String.fromCharCode(65 + i)}`,
+          type: i % 2 === 0 ? "Ongoing" : "Upcoming",
+          address: `Address ${i+1}, ${city}, ${state.name}`,
+          lat, lng
+        };
+      });
+      return {
+        place: city,
+        state: state.name,
+        lat: state.lat,
+        lon: state.lon,
+        stations
+      };
+    }
+
+    // Populate state dropdown
+    statesData.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.code.toLowerCase();  // Keep lowercase for consistency
+      opt.textContent = s.name;
+      document.getElementById('filter-state').appendChild(opt);
+    });
+
+    function getStateColorClass(idx) {
+      if (idx < 10) return 'state-top10';
+      if (idx < 20) return 'state-next10';
+      return 'state-rest';
+    }
+
+    function getMapData() {
+      return statesData.map((s, idx) => ({
+        'hc-key': s.code.toLowerCase(),
+        value: s.ongoing + s.upcoming,
+        ongoing: s.ongoing,
+        upcoming: s.upcoming,
+        name: s.name,
+        className: getStateColorClass(idx)
+      }));
+    }
+
+    function getStateMarkers() {
+      return statesData.map((s, idx) => ({
+        lat: s.lat,
+        lon: s.lon,
+        name: s.name,
+        ongoing: s.ongoing,
+        upcoming: s.upcoming,
+        idx
+      }));
+    }
+
+    let chart;
+    let stateMarkersSeries = null;
+    let detailedMarkersSeries = [];
+    let stateMap = null;
+    let stateMarkers = [];
+
+    function renderIndiaMap() {
+      chart = Highcharts.mapChart('india-map-container', {
+        chart: { map: 'countries/in/in-all', height: 600 },
+        title: { text: '' },
+        mapNavigation: { enabled: true, buttonOptions: { verticalAlign: 'bottom' } },
+        legend: { enabled: false },
+        tooltip: {
+          useHTML: true,
+          formatter: function () {
+            if (this.point && this.point.name) {
+              return `<b>${this.point.name}</b><br>
+                Ongoing Stations: <b>${this.point.ongoing}</b><br>
+                Upcoming Stations: <b>${this.point.upcoming}</b>`;
+            }
+            return '';
+          }
+        },
+        series: [
+          {
+            data: getMapData(),
+            joinBy: ['hc-key', 'hc-key'],
+            name: 'States',
+            states: { hover: { color: '#ffd54f' } },
+            dataLabels: { enabled: false },
+            allowPointSelect: true,
+            className: '',
+            events: {
+              click: function (e) {
+                showStateMap(e.point['hc-key']);
+                // Set dropdown value to lowercase hc-key
+                document.getElementById('filter-state').value = e.point['hc-key'];
+              }
+            }
+          },
+          {
+            type: 'mappoint',
+            name: 'State Markers',
+            color: '#000',
+            data: getStateMarkers().map(m => ({
+              lat: m.lat,
+              lon: m.lon,
+              name: m.name,
+              ongoing: m.ongoing,
+              upcoming: m.upcoming,
+              marker: {
+                symbol: `url(${stateMarkerImage})`,
+                width: 38,
+                height: 38
+              }
+            })),
+            dataLabels: { enabled: false },
+            tooltip: {
+              pointFormatter: function () {
+                return `<b>${this.name}</b><br>
+                  Ongoing Stations: <b>${this.ongoing}</b><br>
+                  Upcoming Stations: <b>${this.upcoming}</b>`;
+              }
+            }
+          }
+        ]
+      });
+      stateMarkersSeries = chart.series[1];
+      detailedMarkersSeries = [];
+    }
+
+    // Show state map with detailed markers
+    function showStateMap(hcKey) {
+      hcKey = hcKey.toLowerCase();
+      const state = statesData.find(s => s.code.toLowerCase() === hcKey);
+      if (!state) return;
+
+      // Hide India map section
+      document.querySelector('.container.py-4').classList.add('d-none');
+      
+      // Show state map section
+      document.getElementById('state-map-section').classList.remove('d-none');
+      document.getElementById('state-map-title').textContent = `${state.name} - Charging Stations`;
+      
+      // Initialize state map
+      if (!stateMap) {
+        stateMap = L.map('state-map-container').setView([state.lat, state.lon], 8);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(stateMap);
+      } else {
+        stateMap.setView([state.lat, state.lon], 8);
+        // Clear existing markers
+        stateMarkers.forEach(marker => stateMap.removeLayer(marker));
+        stateMarkers = [];
+      }
+
+      // Generate station data for the state
+      const ongoingStations = generateStateStations(state, Math.min(state.ongoing, 50), 'Ongoing');
+      const upcomingStations = generateStateStations(state, Math.min(state.upcoming, 50), 'Upcoming');
+      
+      // Add markers to map
+      [...ongoingStations, ...upcomingStations].forEach(station => {
+        const marker = L.marker([station.lat, station.lng], {
+          icon: L.icon({
+            iconUrl: station.type === "Ongoing" ? stationMarkerOngoingImage : stationMarkerUpcomingImage,
+            iconSize: station.type === "Ongoing" ? [24, 31] : [35, 46],
+            iconAnchor: station.type === "Ongoing" ? [12, 31] : [17, 46]
+          })
+        }).addTo(stateMap)
+          .bindPopup(`<b>${station.name}</b><br>${station.address}<br><span class="badge bg-${station.type === 'Ongoing' ? 'primary' : 'success'}">${station.type} Station</span>`);
+        
+        marker.stationData = station;
+        stateMarkers.push(marker);
+      });
+    }
+
+    // Back to India map
+    document.getElementById('back-to-india').addEventListener('click', function() {
+      // Hide state map section
+      document.getElementById('state-map-section').classList.add('d-none');
+      
+      // Show India map section
+      document.querySelector('.container.py-4').classList.remove('d-none');
+      
+      // Reset dropdown
+      document.getElementById('filter-state').value = '';
+    });
+
+    // Filter: State dropdown
+    document.getElementById('filter-state').addEventListener('change', function () {
+      if (this.value) {
+        showStateMap(this.value);
+      } else {
+        // Reset to show India map
+        document.getElementById('state-map-section').classList.add('d-none');
+        document.querySelector('.container.py-4').classList.remove('d-none');
+      }
+    });
+
+    // Filter: Pincode
+    document.getElementById('filter-pincode').addEventListener('input', async function () {
+      const val = this.value.trim();
+      if (val.length === 6 && /^\d+$/.test(val)) {
+        // Use Nominatim API to get real lat/lon for the pincode
+        try {
+          const resp = await fetch(`https://nominatim.openstreetmap.org/search?postalcode=${val}&country=India&format=json&limit=1`);
+          const data = await resp.json();
+          if (data && data.length > 0) {
+            const info = {
+              place: data[0].display_name,
+              state: data[0].address && data[0].address.state ? data[0].address.state : '',
+              lat: parseFloat(data[0].lat),
+              lon: parseFloat(data[0].lon),
+              stations: Array.from({length: 3}).map((_, i) => ({
+                name: `Station ${String.fromCharCode(65 + i)}`,
+                type: i % 2 === 0 ? "Ongoing" : "Upcoming",
+                address: `Address ${i+1}, ${data[0].display_name}`,
+                lat: parseFloat(data[0].lat) + (Math.random() - 0.5) * 0.01,
+                lng: parseFloat(data[0].lon) + (Math.random() - 0.5) * 0.01
+              }))
+            };
+            document.getElementById('india-map-container').classList.add('d-none');
+            document.getElementById('pincode-ui').classList.remove('d-none');
+            document.getElementById('pincode-location').textContent = `${info.place} (${val})`;
+            const list = document.getElementById('station-list');
+            list.innerHTML = '';
+            info.stations.forEach((s, idx) => {
+              const div = document.createElement('div');
+              div.className = 'station-item p-2 mb-2 rounded';
+              div.innerHTML = `<span class="badge bg-${s.type === 'Ongoing' ? 'primary' : 'success'} me-2">${s.type} Station</span>
+                <b>${s.name}</b><br><small>${s.address}</small>`;
+              div.dataset.idx = idx;
+              div.id = `marker-${idx}`;
+              div.addEventListener('mouseenter', () => highlightMarker(idx));
+              div.addEventListener('mouseleave', () => highlightMarker(-1));
+              list.appendChild(div);
+            });
+            renderPincodeMap(info);
+          } else {
+            // Not found
+            document.getElementById('india-map-container').classList.remove('d-none');
+            document.getElementById('pincode-ui').classList.add('d-none');
+          }
+        } catch (e) {
+          document.getElementById('india-map-container').classList.remove('d-none');
+          document.getElementById('pincode-ui').classList.add('d-none');
+        }
+      } else {
+        document.getElementById('india-map-container').classList.remove('d-none');
+        document.getElementById('pincode-ui').classList.add('d-none');
+      }
+    });
+
+    // Render Leaflet map for pincode UI
+    let leafletMap, leafletMarkers = [];
+    function renderPincodeMap(info) {
+      const mapDiv = document.getElementById('pincode-map');
+      if (!leafletMap) {
+        leafletMap = L.map(mapDiv).setView([info.lat, info.lon], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(leafletMap);
+      } else {
+        leafletMap.setView([info.lat, info.lon], 13);
+        leafletMarkers.forEach(m => leafletMap.removeLayer(m));
+        leafletMarkers = [];
+      }
+      info.stations.forEach((s, idx) => {
+        const marker = L.marker([s.lat, s.lng], {
+          icon: L.icon({
+            iconUrl: s.type === "Ongoing" ? stationMarkerOngoingImage : stationMarkerUpcomingImage,
+            iconSize: s.type === "Ongoing" ? [24, 31] : [35, 46],
+            iconAnchor: s.type === "Ongoing" ? [12, 31] : [17, 46]
+          })
+        }).addTo(leafletMap)
+          .bindPopup(`<b>${s.name}</b><br>${s.address}<br><span class="badge bg-${s.type === 'Ongoing' ? 'primary' : 'success'}">${s.type} Station</span>`);
+        marker._customIdx = idx;
+        leafletMarkers.push(marker);
+      });
+    }
+
+    // Highlight marker on hover (Leaflet)
+    function highlightMarker(idx) {
+      // Highlight marker in station list
+      leafletMarkers.forEach((m, i) => {
+        if (i === idx) {
+          m.openPopup();
+          m.setZIndexOffset(1000);
+        } else {
+          m.closePopup();
+          m.setZIndexOffset(0);
+        }
+      });
+      // Highlight in list
+      leafletMarkers.forEach((_, i) => {
+        const markerDiv = document.getElementById(`marker-${i}`);
+        if (markerDiv) markerDiv.classList.toggle('highlight-marker', i === idx);
+      });
+    }
+
+    // Initial render
+    renderIndiaMap();
+  </script>
+</body>
+</html>
