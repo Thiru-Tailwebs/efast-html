@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-FAST India</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- Top Mini-Header -->
+  <div class="mini-header py-1 px-3 bg-light">
+    <div class="container-fluid d-flex justify-content-end align-items-center">
+      <div class="social-icons">
+        <a href="#" class="text-secondary me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="text-secondary me-3"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-secondary"><i class="bi bi-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header (Navbar) -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="assets/images/e-fast-logo.png" alt="E-FAST India" height="36" class="me-2">
+          <!-- <span class="fw-bold fs-5 text-primary">E-FAST India</span> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Partners</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="efreightDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                e-Freight Navigator
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="efreightDropdown">
+                <li><a class="dropdown-item" href="#">Overview</a></li>
+                <li><a class="dropdown-item" href="#">Tools</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Media</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Join Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="position-relative">
+      <img src="assets/images/truck-listing/truck-hero-bg.jpg" class="img-fluid w-100 hero-bg" alt="Truck on road">
+      <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+        <div class="container">
+          <div class="padding-style-1">
+            <div class="row">
+              <div class="col-lg-5 col-md-8">
+                <h1 class="head-white ft-50 ft-24-mob">Heavy Commercial <br> Vehicle (HCVs)</h1>
+                <div class="d-flex gap-3 mt-75 mt-30-mob">
+                  <a href="#" class="btn hero-btn-1">Compare</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Cards -->
+  <section class="comparison-cards bg-blue">
+    <div class="container">
+      <div class="padding-style-1">
+        <div class="row g-4">
+          <!-- Truck 1 Card -->
+          <div class="col-12 col-md-4">
+            <div class="position-relative truck-card">
+              <img src="assets/images/truck-comparision/select-truck-img.jpg" class="img-fluid rounded-3" alt="truck">
+              <div class="position-absolute close-div" style="display: none;">
+                <img src="assets/images/truck-comparision/x-mark.png" class="img-fluid" alt="close">
+              </div>
+            </div>
+            <div class="mt-4 text-center">
+              <p class="ft-18 para-blue mb-1">Select Truck</p>
+              <p class="ft-20 head-blue mb-0"></p>
+            </div>
+          </div>
+          <!-- Truck 2 Card (Empty) -->
+          <div class="col-12 col-md-4">
+            <div class="position-relative truck-card">
+              <img src="assets/images/truck-comparision/select-truck-img.jpg" class="img-fluid rounded-3" alt="truck">
+              <div class="position-absolute close-div" style="display: none;">
+                <img src="assets/images/truck-comparision/x-mark.png" class="img-fluid" alt="close">
+              </div>
+            </div>
+            <div class="mt-4 text-center">
+              <p class="ft-18 para-blue mb-1">Select Truck</p>
+              <p class="ft-20 head-blue mb-0"></p>
+            </div>
+          </div>
+          <!-- Truck 3 Card (Empty) -->
+          <div class="col-12 col-md-4">
+            <div class="position-relative truck-card">
+              <img src="assets/images/truck-comparision/select-truck-img.jpg" class="img-fluid rounded-3" alt="truck">
+              <div class="position-absolute close-div" style="display: none;">
+                <img src="assets/images/truck-comparision/x-mark.png" class="img-fluid" alt="close">
+              </div>
+            </div>
+            <div class="mt-4 text-center">
+              <p class="ft-18 para-blue mb-1">Select Truck</p>
+              <p class="ft-20 head-blue mb-0"></p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5">
+          <button class="btn compare-btn" id="downloadPdfBtn">Download PDF</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="comparison-table">
+    <div class="container">
+      <div class="padding-style-1">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="compare-spec-table-title-card">
+              <p class="mb-1"></p>
+              <h3>Specifications</h3>
+            </div>
+            <!-- Battery and Power -->
+            <div class="compare-spec-table-card">
+              <div class="compare-spec-table-header">Battery and Power</div>
+              <table class="table table-striped compare-spec-table mb-0">
+                <tbody>
+                  <tr>
+                    <td>Charging Type</td>
+                  </tr>
+                  <tr>
+                    <td>Charging Time</td>
+                  </tr>
+                  <tr>
+                    <td>Battery Chemistry & Max Power</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Performance -->
+            <div class="compare-spec-table-card">
+              <div class="compare-spec-table-header">Performance</div>
+              <table class="table table-striped compare-spec-table mb-0">
+                <tbody>
+                  <tr>
+                    <td>Wheel Base (in mm)</td>
+                  </tr>
+                  <tr>
+                    <td>Chassis Variants</td>
+                  </tr>
+                  <tr>
+                    <td>Max Power</td>
+                  </tr>
+                  <tr>
+                    <td>Max Torque (Nm)</td>
+                  </tr>
+                  <tr>
+                    <td>Top Speed (km/h)</td>
+                  </tr>
+                  <tr>
+                    <td>Motor Type</td>
+                  </tr>
+                  <tr>
+                    <td>Wheel Size</td>
+                  </tr>
+                  <tr>
+                    <td>Regenerative Braking (Yes/No)</td>
+                  </tr>
+                  <tr>
+                    <td>Drive Type (2WD, FWD, AWD)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Warranty Details & Features -->
+            <div class="compare-spec-table-card">
+              <div class="compare-spec-table-header">Warranty Details & Features</div>
+              <table class="table table-striped compare-spec-table mb-0">
+                <tbody>
+                  <tr>
+                    <td>Warranty Details (Battery and vehicle warranty in years/km)</td>
+                  </tr>
+                  <tr>
+                    <td>Special Features (Telematics, driver assist, etc.)</td>
+                  </tr>
+                  <tr>
+                    <td>Commercial Status</td>
+                  </tr>
+                  <tr>
+                    <td>Availability for Pilot</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Delivery Duration -->
+            <div class="compare-spec-table-card">
+              <div class="compare-spec-table-header">Delivery Duration</div>
+              <table class="table table-striped compare-spec-table mb-0">
+                <tbody>
+                  <tr>
+                    <td>Delivery Period</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Truck 1 data column -->
+          <div class="col-md-3 truck-spec-col"></div>
+
+          <!-- Truck 2 data column -->
+          <div class="col-md-3 truck-spec-col"></div>
+
+          <!-- Truck 3 data column -->
+          <div class="col-md-3 truck-spec-col"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Selection Modal -->
+  <div id="brandModal" class="modal fade" tabindex="-1" aria-labelledby="brandModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body px-4 py-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">Manufacturer OEM</h4>
+            <div class="position-relative">
+              <input type="text" id="brandSearch" class="search-input" placeholder="Search here...">
+              <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y pe-3"></i>
+            </div>
+          </div>
+          <p>Make selection</p>
+          <ul id="brandList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Selection Modal -->
+  <div id="modelModal" class="modal fade" tabindex="-1" aria-labelledby="modelModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body px-4 py-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="me-2 text-muted">Select Vehicle Model Name</span>
+            <div class="position-relative">
+              <input type="text" id="modelSearch" class="search-input" placeholder="Search here...">
+              <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y pe-3"></i>
+            </div>
+          </div>
+          <h4 id="selectedBrandName" class="mb-3 ms-2"></h4>
+          <ul id="modelList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Example truck data (replace with API call)
+    const truckData = {
+      "Tata Motors": [
+        {
+          name: "Tata Prima Electric",
+          img: "assets/images/truck-listing/truck-1.jpg",
+          specs: [
+            "DC Ultra-Fast Charging", "1h: 30m", "LFP (Lithium Ferrous Phosphate)",
+            "4300", "Flatbed", "240 kW", "2950", "80",
+            "Permanent Magnet Synchronous Motor", "11 x 20-18 PR", "Yes", "AWD",
+            "5 years/5.0 Lakh km", "ADAS", "ARAI approval in process", "Available Pilot",
+            "6 to 7 Months"
+          ]
+        },
+        {
+          name: "Tata Prima 1234",
+          img: "assets/images/truck-listing/truck-3.jpg",
+          specs: [
+            "DC Ultra-Fast Charging", "1h: 30m", "LFP (Lithium Ferrous Phosphate)",
+            "4300", "Flatbed", "240 kW", "2950", "80",
+            "Permanent Magnet Synchronous Motor", "11 x 20-18 PR", "Yes", "AWD",
+            "5 years/5.0 Lakh km", "ADAS", "ARAI approval in process", "Available Pilot",
+            "6 to 7 Months"
+          ]
+        }
+      ],
+      "Ashok Leyland": [
+        {
+          name: "Boss 16T",
+          img: "assets/images/truck-listing/truck-2.jpg",
+          specs: [
+            "Charging Type B", "1h 30m", "LFP",
+            "4500", "Chassis Y", "250 kW", "3000", "95",
+            "Motor Type Y", "Wheel Size Y", "Yes", "AWD",
+            "6 years", "Feature Y", "In Process", "Pilot Yes",
+            "8 Months"
+          ]
+        },
+        {
+          name: "Boss 12T",
+          img: "assets/images/truck-listing/truck-3.jpg",
+          specs: [
+            "Charging Type B", "1h 30m", "LFP",
+            "4500", "Chassis Y", "250 kW", "3000", "95",
+            "Motor Type Y", "Wheel Size Y", "Yes", "AWD",
+            "6 years", "Feature Y", "In Process", "Pilot Yes",
+            "8 Months"
+          ]
+        }
+      ]
+    };
+
+    let selectedCardIndex = null;
+
+    // Card click → open brand modal
+    document.querySelectorAll('.comparison-cards .col-md-4').forEach((card, index) => {
+      card.addEventListener('click', () => {
+        selectedCardIndex = index;
+        openBrandModal();
+      });
+    });
+
+    // Open brand modal
+    function openBrandModal() {
+      const brandList = document.getElementById('brandList');
+      brandList.innerHTML = Object.keys(truckData)
+        .map(brand => `<li onclick="selectBrand('${brand}')">${brand}</li>`)
+        .join('');
+      const modal = new bootstrap.Modal(document.getElementById('brandModal'));
+      modal.show();
+    }
+
+    // Select brand → open model modal
+    function selectBrand(brand) {
+      const brandModal = bootstrap.Modal.getInstance(document.getElementById('brandModal'));
+      brandModal.hide();
+
+      document.getElementById('selectedBrandName').innerText = brand;
+      const models = truckData[brand];
+      document.getElementById('modelList').innerHTML = models
+        .map(m => `<li onclick="selectModel('${brand}', '${m.name}')">${m.name}</li>`)
+        .join('');
+
+      const modal = new bootstrap.Modal(document.getElementById('modelModal'));
+      modal.show();
+    }
+
+    // Select model → update card + table
+    function selectModel(brand, modelName) {
+      const modelModal = bootstrap.Modal.getInstance(document.getElementById('modelModal'));
+      modelModal.hide();
+      const model = truckData[brand].find(m => m.name === modelName);
+
+      // Update selected card
+      const card = document.querySelectorAll('.comparison-cards .col-md-4')[selectedCardIndex];
+      card.querySelector('img').src = model.img;
+      card.querySelector('.ft-18').innerText = brand;
+      card.querySelector('.ft-20').innerText = modelName;
+      card.querySelector('.close-div').style.display = 'block';
+
+      // Update the correct truck column in the table
+      const truckColumn = document.querySelectorAll('.truck-spec-col')[selectedCardIndex];
+      truckColumn.innerHTML = generateTruckSpecsHTML(brand, modelName, model.specs);
+
+      document.getElementById('modelModal').style.display = 'none';
+    }
+
+    // Generate table HTML for truck specs
+    function generateTruckSpecsHTML(brand, modelName, specs) {
+      return `
+        <div class="compare-spec-table-title-card">
+          <p class="mb-1">${brand || ''}</p>
+          <h3>${modelName || ''}</h3>
+        </div>
+        <div class="compare-spec-table-card">
+          <div class="compare-spec-table-header">Battery and Power</div>
+          <table class="table table-striped compare-spec-table mb-0">
+            <tbody>
+              <tr><td>${specs[0] || ''}</td></tr>
+              <tr><td>${specs[1] || ''}</td></tr>
+              <tr><td>${specs[2] || ''}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="compare-spec-table-card">
+          <div class="compare-spec-table-header">Performance</div>
+          <table class="table table-striped compare-spec-table mb-0">
+            <tbody>
+              <tr><td>${specs[3] || ''}</td></tr>
+              <tr><td>${specs[4] || ''}</td></tr>
+              <tr><td>${specs[5] || ''}</td></tr>
+              <tr><td>${specs[6] || ''}</td></tr>
+              <tr><td>${specs[7] || ''}</td></tr>
+              <tr><td>${specs[8] || ''}</td></tr>
+              <tr><td>${specs[9] || ''}</td></tr>
+              <tr><td>${specs[10] || ''}</td></tr>
+              <tr><td>${specs[11] || ''}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="compare-spec-table-card">
+          <div class="compare-spec-table-header">Warranty Details & Features</div>
+          <table class="table table-striped compare-spec-table mb-0">
+            <tbody>
+              <tr><td>${specs[12] || ''}</td></tr>
+              <tr><td>${specs[13] || ''}</td></tr>
+              <tr><td>${specs[14] || ''}</td></tr>
+              <tr><td>${specs[15] || ''}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="compare-spec-table-card">
+          <div class="compare-spec-table-header">Delivery Duration</div>
+          <table class="table table-striped compare-spec-table mb-0">
+            <tbody>
+              <tr><td>${specs[16] || ''}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Close (X) button → clear card + column
+    document.querySelectorAll('.close-div').forEach((closeBtn, index) => {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        // Reset card
+        const card = document.querySelectorAll('.comparison-cards .col-md-4')[index];
+        card.querySelector('img').src = "assets/images/truck-comparision/select-truck-img.jpg";
+        card.querySelector('.ft-18').innerText = "Select Truck";
+        card.querySelector('.ft-20').innerText = "";
+        closeBtn.style.display = 'none';
+
+        // Clear matching truck column
+        const truckColumn = document.querySelectorAll('.truck-spec-col')[index];
+        truckColumn.innerHTML = "";
+      });
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer-section bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-6 col-md-3">
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">Home</a></li>
+            <li><a href="#" class="footer-link">About</a></li>
+            <li><a href="#" class="footer-link">Partners</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3">
+          <ul class="list-unstyled">
+            <li><a href="#" class="footer-link">Media</a></li>
+            <li><a href="#" class="footer-link">Events</a></li>
+            <li><a href="#" class="footer-link">Join Us</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="fw-bold mb-2">E- Freight Navigator</div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="mb-2">
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-white me-3 fs-5"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+          </div>
+          <div class="small text-white-50">
+            Niti Aayog is India’s premier policy-making institution working to bolster the country’s economic growth in a sustainable manner.
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center border-top border-secondary pt-3 mt-4">
+        <div class="small text-white-50">
+          <a href="#" class="footer-link me-3">Terms and policies</a>
+          © 2025 e-Fast India
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Select2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <!-- Custom JS -->
+  <script src="assets/js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+      const element = document.querySelector('.comparison-table');
+      const opt = {
+        margin:       0.5,
+        filename:     'truck-comparison.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    });
+  </script>
+</body>
+</html>
